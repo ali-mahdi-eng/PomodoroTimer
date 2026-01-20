@@ -1,0 +1,36 @@
+{
+    "short_name": "Pomodoro",
+    "name": "Pomodoro Timer (:",
+    "start_url": "./index.html",
+    "description": "Pomodoro Timer is a Progressive Web Application (PWA), provides some features to make study, work, productivity more easier with pomodoro technique.",
+    
+    "icons": [
+        {
+            "purpose": "maskable",
+            "sizes": "48x48",
+            "src": "assets/icons/maskable_icon_x48.png",
+            "type": "image/png"
+          },
+        {
+            "purpose": "maskable",
+            "sizes": "96x96",
+            "src": "assets/icons/maskable_icon_x96.png",
+            "type": "image/png"
+          },
+        {
+            "purpose": "maskable",
+            "sizes": "192x192",
+            "src": "assets/icons/maskable_icon_x192.png",
+            "type": "image/png"
+          },
+        {
+            "purpose": "maskable",
+            "sizes": "512x512",
+            "src": "assets/icons/maskable_icon_x512.png",
+            "type": "image/png"
+          }
+    ],
+    "display": "standalone",
+    "background_color": "#e3e8ea",
+    "theme_color": "tomato"
+}
