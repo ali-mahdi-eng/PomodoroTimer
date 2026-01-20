@@ -1,7 +1,7 @@
-# Pomodoro Timer
+# Study With Pomodoro
 version: 0.1.0
 
-"Pomodoro Timer" is a Progressive Web Application (PWA), provides some features to make study, work, productivity more easier with pomodoro technique.
+"Study With Pomodoro" is a Progressive Web Application (PWA), provides some features to make study, work, productivity more easier with pomodoro technique.
 
 note: this App contains only one page (SPA)
 
