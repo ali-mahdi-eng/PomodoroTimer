@@ -37,6 +37,10 @@ main.main {
     padding: 0 16px;
 }
 
+section {
+    height: 100%;
+    width: 100%;
+}
 
 nav.navigator {
     user-select: none;
@@ -62,7 +66,7 @@ nav.navigator {
     width: 80px;
     align-content: center;
     border: none;
-    border-radius: 6px;
+    /* border-radius: 6px; */
     background: none;
     transition: all .2s linear;
 }
@@ -70,8 +74,21 @@ nav.navigator {
     position: relative;
     top: -3px;
     transition: all .2s linear;
-    border: 2px solid #e0e0e0;
+    /* border: 2px solid #e0e0e0; */
+    border-top: 2px solid var(--primary-color);
+    background: rgba(255,99,71, 0.05);
     transition: border 0.2s linear;
+}
+.navigator .navigation:not(.active-navigation-btn) {
+    opacity: 0.4;
+}
+.navigator .navigation.active-navigation-btn {
+    & svg path {
+        fill: var(--primary-color);
+    }
+    & .title {
+        color: var(--primary-color);
+    }
 }
 
 .navigation .icon {
@@ -93,6 +110,15 @@ nav.navigator {
 
 
 
+/* Title of "Settings" and "Sounds" Page*/
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    font-size: 30px;
+}
 
 
 
@@ -121,12 +147,12 @@ nav.navigator {
     background: var(--primary-color);
     color: #ededed;
     font-size: 1.5rem;
-    /* box-shadow: 0 0 10px 1px rgba(0,0,0,0.016); */
-    box-shadow: -2px 2px 4px 2px rgba(0,0,0,0.16);
-    transition: all 0.1s linear;
+    box-shadow: -2px 2px 4px 2px var(--shadow-color);
+    /* transition: all 0.1s linear; */
+    transition: all 0.1s ease-out;
 }
 .start-pomodoro-btn:active {
-    transform: skew(-15deg);
+    box-shadow: -3px 4px 4px 2px var(--shadow-color);
 }
 
 .pause-pomodoro-btn,
@@ -158,9 +184,14 @@ nav.navigator {
     height: 220px;
     width: 220px;
     border-radius: 50%;
-    background: #fff;
-    /* color: #333; */
+    /* background: #fff; */
+    background: none;
     color: #222;
+    transition: all 0.1 linear;
+}
+.timer-container:active {
+    scale: 0.98;
+    filter: grayscale(60%);
 }
 
 .timer-svg {
@@ -172,7 +203,8 @@ nav.navigator {
 .timer-circle-track,
 .timer-circle-progress {
     fill: none;
-    stroke-width: 5;
+    /* stroke-width: 5; */
+    stroke-width: 1.5;
     stroke-linecap: round;
 }
 
@@ -193,6 +225,19 @@ nav.navigator {
     font-size: 56px;
     font-weight: 700;
     font-family: Arial;
+    font-weight: 600;
+    font-family: Georgia;
+}
+
+.timer-edit {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    translate: -50%;
+    text-decoration: 1px underline var(--navigator-bg);
+    color: var(--navigator-bg);
+    font-size: 0.65rem;
+    opacity: 0.8;
 }
 
 /* ================================ */
@@ -208,6 +253,149 @@ nav.navigator {
 /* ================================ */
 /* ==========Settings Page========== */
 
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    font-size: 30px;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: calc(100% - 100px);
+    width: 100%;
+    list-style: none;
+}
+
+.settings-items {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    padding: 5px 20px 5px 12px;
+    border-radius: 10px;
+    background: #ccc;
+    font-size: 1rem;
+}
+
+.settings-items span {
+    color: hsl(0,0%,10%);
+    font-weight: 600;
+}
+.settings-items button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 6px;
+    background: none;
+    color: hsl(0,0%,10%);
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 0 15px #e8e8e8 inset;
+}
+
+
+
+.select-container {
+    display: none; /* change with js */
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+}
+
+.select-box-bg {
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0, 0.4);
+}
+
+
+.select-box {
+    z-index: 2;
+    position: fixed;
+    top: 32%;
+    left: 50%;
+    translate: -50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* gap: 5px 12px; */
+    height: 220px;
+    width: 85%;
+    padding: 0 10px;
+    border-radius: 10px;
+    background: #ddd;
+    box-shadow: 0 0 8px 1px var(--shadow-color);
+}
+
+.select-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px 12px;
+}
+
+.select-box-title {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    color: hsl(0,0%,10%);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.select-items {
+    flex-basis: calc(90% / 3);
+    height: 40px;
+    /* width: 70px; */
+    border: none;
+    border-radius: 7px;
+    /* background: var(--primary-color); */
+    /* background: hsl(9.1,100%,63.9%); */
+    border: 2px solid hsl(9.1,100%,63.9%);
+    color: hsl(0,0%,10%);
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: background 0.1s ease-in-out;
+}
+.active-select-items {
+    border: 2px solid hsl(10,100%,80%);
+    /* background: hsl(9.1,100%,55.9%); */
+    background: hsl(9.1,100%,60.9%);
+    color: #eee;
+}
+
+.select-box-msg {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 10px; */
+    color: hsl(0,0%,25%);
+    font-size: 0.9rem;
+}
 
 /* ================================ */
 /* ================================ */
@@ -221,7 +409,75 @@ nav.navigator {
 
 
 /* ================================ */
-/* ==========Profile Page========== */
+/* ===========Sounds Page========== */
+
+.sounds-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: calc(100% - 100px);
+    width: 100%;
+    list-style: none;
+}
+
+.sound-item {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 24px;
+    height: 60px;
+    width: 100%;
+    padding: 0 20px 0 10px;
+    border-radius: 10px;
+    background: #ccc;
+    font-size: 1rem;
+    transition: border 0.2s linear;
+}
+.active-sound-item {
+    border: 1px solid var(--navigator-bg);
+}
+
+.sound-avatar {
+    /* height: 36px;
+    width: 36px; */
+    height: 40px;
+    width: 40px;
+    /* border: 1px solid #000; */
+    border: none;
+    border-radius: 5px;
+}
+
+.sound-name {
+    justify-self: flex-start;
+    max-width: 60%;
+    color: hsl(0,0%,10%);
+    font-weight: 600;
+}
+
+.sound-play-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    translate: -50% -50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border: 2px solid #e8e8e8;
+    border: 2px solid tomato;
+    border: none;
+    border-radius: 6px;
+    background: none;
+}
+.sound-play-btn svg {
+    height: 20px;
+    width: 20px;
+    fill: tomato;
+}
 
 
 /* ================================ */
