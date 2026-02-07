@@ -9,11 +9,10 @@ export function updateTimerUI(remainingTimeinMS, totalTimeInMS) {
     // Time In Milliseconds (MS)
     const timerText = document.querySelector(".timer-text");
     const timerCircleProgress = document.querySelector(".timer-circle-progress");
-    let hh = Math.floor(((remainingTimeinMS/1000) / 3600));
-    let mm = formatTime((((remainingTimeinMS/1000) % 3600)) / 60);
+    let mm = formatTime((remainingTimeinMS/1000) / 60);
     let ss = formatTime(((remainingTimeinMS/1000) % 60));
 
-    timerText.textContent = `${(hh>0) ? (hh +":"):("")}${mm}:${ss}`;
+    timerText.textContent = `${mm}:${ss}`;
     timerCircleProgress.style.strokeDashoffset = (totalTimeInMS > 0) ? (1-(remainingTimeinMS/totalTimeInMS)) : (0);
 }
 
